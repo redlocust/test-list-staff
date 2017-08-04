@@ -2,7 +2,6 @@
 
 var React = require('react');
 var Link = require('react-router').Link;
-var employees = require('../../data.json');
 var toastr = require('toastr');
 
 var DepartmentsPage = React.createClass({
@@ -13,14 +12,15 @@ var DepartmentsPage = React.createClass({
   render: function () {
 
 
-    // var createAuthorRow = function(author) {
-    //   return (
-    //     <tr key={author.id}>
-    //       <td><Link to={"author/" + author.id}>{author.id}</Link></td>
-    //       <td>{author.firstName} {author.lastName}</td>
-    //     </tr>
-    //   );
-    // };
+    var createDepartmentRow = function (department) {
+      return (
+        <tr key={department.id}>
+          <td></td>
+          <td><Link to={"departments/" + department.id + "/employees"}>{department.id}</Link></td>
+          <td><Link to={"departments/" + department.id + "/employees"}>{department.name}</Link></td>
+        </tr>
+      );
+    };
 
     return (
       <div>
@@ -29,12 +29,11 @@ var DepartmentsPage = React.createClass({
           <tr>
             <th></th>
             <th>ID</th>
-            <th>Name</th>
+            <th>Наименование</th>
           </tr>
           </thead>
           <tbody>
-          {this.props.appName}
-          {/*{this.props.authors.map(createAuthorRow, this)}*/}
+            {this.props.catalog.departments.map(createDepartmentRow, this)}
           </tbody>
         </table>
       </div>

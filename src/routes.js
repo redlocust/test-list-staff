@@ -12,7 +12,7 @@ var Redirect = ReactRouter.Redirect;
 var App = require('./components/app');
 var HomePage = require('./components/homePage');
 var Departments = require('./components/employees/departmentsPage');
-// var ManageAuthorPage = require('./components/authors/manageAuthorPage');
+var EmployeePage = require('./components/employees/employeePage');
 // var AboutPage = require('./components/about/aboutPage');
 // var NotFoundPage = require('./components/notFoundPage');
 
@@ -22,7 +22,7 @@ var routes = (
   <IndexRoute component={HomePage} />
   <Route path="departments" component={Departments} />
   {/*<Route path="author" component={ManageAuthorPage} />*/}
-  {/*<Route path="author/:id" component={ManageAuthorPage} />*/}
+  <Route path="employees/:id" component={EmployeePage} />
   {/*<Route path="about" component={AboutPage} />*/}
   {/*<Redirect from="about-us" to="about" />*/}
   {/*<Redirect from="awthurs" to="authors" />*/}

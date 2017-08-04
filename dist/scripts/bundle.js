@@ -35991,7 +35991,7 @@ module.exports = warning;
 },{"_process":45}],235:[function(require,module,exports){
 var React = require('react');
 var Header = require('./common/header');
-var employees = require('../data.json');
+var catalog = require('../data.json');
 $ = jQuery = require('jquery');
 
 var App = React.createClass({
@@ -36009,14 +36009,14 @@ var App = React.createClass({
     var retrievedObject = localStorage.getItem(toLocalStorage);
 
     this.setState({
-      employees: JSON.parse(retrievedObject)
+      catalog: JSON.parse(retrievedObject)
     }, function () {
-      console.log('state', this.state.employees);
+      console.log('state', this.state.catalog);
     });
   },
 
   componentWillMount: function () {
-    this.loadJSONToLocalStorage('employees', employees);
+    this.loadJSONToLocalStorage('catalog', catalog);
   },
 
   render: function () {
@@ -36027,7 +36027,7 @@ var App = React.createClass({
       React.createElement(
         'div',
         { className: 'container-fluid' },
-        React.cloneElement(this.props.children, { appName: 'Foo' })
+        React.cloneElement(this.props.children, { catalog: this.state.catalog })
       )
     );
   }
@@ -36035,7 +36035,7 @@ var App = React.createClass({
 
 module.exports = App;
 
-},{"../data.json":239,"./common/header":236,"jquery":43,"react":231}],236:[function(require,module,exports){
+},{"../data.json":240,"./common/header":236,"jquery":43,"react":231}],236:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -36074,7 +36074,7 @@ var Header = React.createClass({
             React.createElement(
               Link,
               { to: 'departments' },
-              'Departments'
+              '\u041E\u0442\u0434\u0435\u043B\u044B'
             )
           )
         )
@@ -36090,7 +36090,6 @@ module.exports = Header;
 
 var React = require('react');
 var Link = require('react-router').Link;
-var employees = require('../../data.json');
 var toastr = require('toastr');
 
 var DepartmentsPage = React.createClass({
@@ -36102,14 +36101,31 @@ var DepartmentsPage = React.createClass({
 
   render: function () {
 
-    // var createAuthorRow = function(author) {
-    //   return (
-    //     <tr key={author.id}>
-    //       <td><Link to={"author/" + author.id}>{author.id}</Link></td>
-    //       <td>{author.firstName} {author.lastName}</td>
-    //     </tr>
-    //   );
-    // };
+    var createDepartmentRow = function (department) {
+      return React.createElement(
+        'tr',
+        { key: department.id },
+        React.createElement('td', null),
+        React.createElement(
+          'td',
+          null,
+          React.createElement(
+            Link,
+            { to: "departments/" + department.id + "/employees" },
+            department.id
+          )
+        ),
+        React.createElement(
+          'td',
+          null,
+          React.createElement(
+            Link,
+            { to: "departments/" + department.id + "/employees" },
+            department.name
+          )
+        )
+      );
+    };
 
     return React.createElement(
       'div',
@@ -36132,14 +36148,14 @@ var DepartmentsPage = React.createClass({
             React.createElement(
               'th',
               null,
-              'Name'
+              '\u041D\u0430\u0438\u043C\u0435\u043D\u043E\u0432\u0430\u043D\u0438\u0435'
             )
           )
         ),
         React.createElement(
           'tbody',
           null,
-          this.props.appName
+          this.props.catalog.departments.map(createDepartmentRow, this)
         )
       )
     );
@@ -36148,7 +36164,74 @@ var DepartmentsPage = React.createClass({
 
 module.exports = DepartmentsPage;
 
-},{"../../data.json":239,"react":231,"react-router":200,"toastr":233}],238:[function(require,module,exports){
+},{"react":231,"react-router":200,"toastr":233}],238:[function(require,module,exports){
+"use strict";
+
+var React = require('react');
+var Link = require('react-router').Link;
+var toastr = require('toastr');
+
+var EmployeePage = React.createClass({
+  displayName: 'EmployeePage',
+
+  // propTypes: {
+  //   authors: React.PropTypes.array.isRequired
+  // },
+
+  render: function () {
+    const ID = this.props.params.id;
+
+    var searchEmployee = function (employee) {
+      return employee.id === ID;
+    };
+
+    return React.createElement(
+      'div',
+      { className: 'container' },
+      React.createElement(
+        'div',
+        { className: 'row' },
+        React.createElement(
+          'div',
+          { className: 'col-xs-12 col-sm-6 col-md-6' },
+          React.createElement(
+            'div',
+            { className: 'well well-sm' },
+            React.createElement(
+              'div',
+              { className: 'row' },
+              React.createElement(
+                'div',
+                { className: 'col-sm-6 col-md-4' },
+                React.createElement('img', { src: this.props.catalog.employees.filter(searchEmployee, this)[0].data,
+                  alt: '',
+                  className: 'img-rounded img-responsive' })
+              ),
+              React.createElement(
+                'div',
+                { className: 'col-sm-6 col-md-8' },
+                React.createElement(
+                  'h4',
+                  null,
+                  this.props.catalog.employees.filter(searchEmployee, this)[0].name
+                ),
+                React.createElement(
+                  'small',
+                  null,
+                  this.props.catalog.employees.filter(searchEmployee, this)[0].phone
+                )
+              )
+            )
+          )
+        )
+      )
+    );
+  }
+});
+
+module.exports = EmployeePage;
+
+},{"react":231,"react-router":200,"toastr":233}],239:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -36159,23 +36242,62 @@ var Home = React.createClass({
   displayName: 'Home',
 
   render: function () {
+    var createEmployeeRow = function (employee) {
+      return React.createElement(
+        'tr',
+        { key: employee.id },
+        React.createElement('td', null),
+        React.createElement(
+          'td',
+          null,
+          React.createElement(
+            Link,
+            { to: "employees/" + employee.id },
+            employee.id
+          )
+        ),
+        React.createElement(
+          'td',
+          null,
+          React.createElement(
+            Link,
+            { to: "employees/" + employee.id },
+            employee.name
+          )
+        )
+      );
+    };
+
     return React.createElement(
       'div',
-      { className: 'jumbotron' },
+      null,
       React.createElement(
-        'h1',
-        null,
-        'List of all employees'
-      ),
-      React.createElement(
-        'p',
-        null,
-        '1'
-      ),
-      React.createElement(
-        'p',
-        null,
-        '2'
+        'table',
+        { className: 'table' },
+        React.createElement(
+          'thead',
+          null,
+          React.createElement(
+            'tr',
+            null,
+            React.createElement('th', null),
+            React.createElement(
+              'th',
+              null,
+              'ID'
+            ),
+            React.createElement(
+              'th',
+              null,
+              '\u0424\u0418\u041E'
+            )
+          )
+        ),
+        React.createElement(
+          'tbody',
+          null,
+          this.props.catalog.employees.map(createEmployeeRow, this)
+        )
       )
     );
   }
@@ -36183,7 +36305,7 @@ var Home = React.createClass({
 
 module.exports = Home;
 
-},{"react":231,"react-router":200}],239:[function(require,module,exports){
+},{"react":231,"react-router":200}],240:[function(require,module,exports){
 module.exports={
 	"employees" : [
 		{ "id": "101", "department": "100", "phone" : "+78234967890", "photo" : "100", "name" : "Дутов Эдуард Никонович" },
@@ -36228,7 +36350,7 @@ module.exports={
 
 
 
-},{}],240:[function(require,module,exports){
+},{}],241:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -36237,7 +36359,7 @@ var routes = require('./routes');
 
 ReactDom.render(routes, document.getElementById('app'));
 
-},{"./routes":241,"react":231,"react-dom":47}],241:[function(require,module,exports){
+},{"./routes":242,"react":231,"react-dom":47}],242:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -36252,7 +36374,7 @@ var Redirect = ReactRouter.Redirect;
 var App = require('./components/app');
 var HomePage = require('./components/homePage');
 var Departments = require('./components/employees/departmentsPage');
-// var ManageAuthorPage = require('./components/authors/manageAuthorPage');
+var EmployeePage = require('./components/employees/employeePage');
 // var AboutPage = require('./components/about/aboutPage');
 // var NotFoundPage = require('./components/notFoundPage');
 
@@ -36263,10 +36385,11 @@ var routes = React.createElement(
     Route,
     { path: '/', component: App },
     React.createElement(IndexRoute, { component: HomePage }),
-    React.createElement(Route, { path: 'departments', component: Departments })
+    React.createElement(Route, { path: 'departments', component: Departments }),
+    React.createElement(Route, { path: 'employees/:id', component: EmployeePage })
   )
 );
 
 module.exports = routes;
 
-},{"./components/app":235,"./components/employees/departmentsPage":237,"./components/homePage":238,"react":231,"react-router":200}]},{},[240]);
+},{"./components/app":235,"./components/employees/departmentsPage":237,"./components/employees/employeePage":238,"./components/homePage":239,"react":231,"react-router":200}]},{},[241]);

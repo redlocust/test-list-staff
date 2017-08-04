@@ -6,11 +6,30 @@ var Link = Router.Link;
 
 var Home = React.createClass({
   render: function() {
+    var createEmployeeRow = function (employee) {
+      return (
+        <tr key={employee.id}>
+          <td></td>
+          <td><Link to={"employees/" + employee.id}>{employee.id}</Link></td>
+          <td><Link to={"employees/" + employee.id}>{employee.name}</Link></td>
+        </tr>
+      );
+    };
+
     return (
-      <div className="jumbotron">
-        <h1>List of all employees</h1>
-        <p>1</p>
-        <p>2</p>
+      <div>
+        <table className="table">
+          <thead>
+          <tr>
+            <th></th>
+            <th>ID</th>
+            <th>ФИО</th>
+          </tr>
+          </thead>
+          <tbody>
+          {this.props.catalog.employees.map(createEmployeeRow, this)}
+          </tbody>
+        </table>
       </div>
     );
   }

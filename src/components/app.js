@@ -1,6 +1,6 @@
 var React = require('react');
 var Header = require('./common/header');
-var employees = require('../data.json');
+var catalog = require('../data.json');
 $ = jQuery = require('jquery');
 
 var App = React.createClass({
@@ -17,15 +17,15 @@ var App = React.createClass({
     var retrievedObject = localStorage.getItem(toLocalStorage);
 
     this.setState({
-      employees: JSON.parse(retrievedObject)
+      catalog: JSON.parse(retrievedObject)
     }, function () {
-      console.log('state', this.state.employees);
+      console.log('state', this.state.catalog);
     });
 
   },
 
   componentWillMount: function () {
-    this.loadJSONToLocalStorage('employees', employees);
+    this.loadJSONToLocalStorage('catalog', catalog);
   },
 
   render: function () {
@@ -33,7 +33,7 @@ var App = React.createClass({
       <div>
         <Header/>
         <div className="container-fluid">
-          {React.cloneElement(this.props.children, {appName: 'Foo'})}
+          {React.cloneElement(this.props.children, {catalog: this.state.catalog})}
         </div>
       </div>
     );
