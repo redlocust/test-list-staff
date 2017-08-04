@@ -35991,14 +35991,32 @@ module.exports = warning;
 },{"_process":45}],235:[function(require,module,exports){
 var React = require('react');
 var Header = require('./common/header');
+var employees = require('../data.json');
 $ = jQuery = require('jquery');
 
 var App = React.createClass({
   displayName: 'App',
 
 
+  loadJSONToLocalStorage: function (toLocalStorage, fromObject) {
+    if (localStorage[toLocalStorage]) {
+      // Data already loaded locally
+    } else {
+      // Data not yet loaded locally! Loading it!
+      localStorage[toLocalStorage] = JSON.stringify(fromObject);
+    }
+
+    var retrievedObject = localStorage.getItem(toLocalStorage);
+
+    this.setState({
+      employees: JSON.parse(retrievedObject)
+    }, function () {
+      console.log('state', this.state.employees);
+    });
+  },
+
   componentWillMount: function () {
-    console.log('will mount');
+    this.loadJSONToLocalStorage('employees', employees);
   },
 
   render: function () {
@@ -36009,7 +36027,7 @@ var App = React.createClass({
       React.createElement(
         'div',
         { className: 'container-fluid' },
-        this.props.children
+        React.cloneElement(this.props.children, { appName: 'Foo' })
       )
     );
   }
@@ -36017,7 +36035,7 @@ var App = React.createClass({
 
 module.exports = App;
 
-},{"./common/header":236,"jquery":43,"react":231}],236:[function(require,module,exports){
+},{"../data.json":239,"./common/header":236,"jquery":43,"react":231}],236:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -36072,6 +36090,7 @@ module.exports = Header;
 
 var React = require('react');
 var Link = require('react-router').Link;
+var employees = require('../../data.json');
 var toastr = require('toastr');
 
 var DepartmentsPage = React.createClass({
@@ -36082,6 +36101,7 @@ var DepartmentsPage = React.createClass({
   // },
 
   render: function () {
+
     // var createAuthorRow = function(author) {
     //   return (
     //     <tr key={author.id}>
@@ -36116,7 +36136,11 @@ var DepartmentsPage = React.createClass({
             )
           )
         ),
-        React.createElement('tbody', null)
+        React.createElement(
+          'tbody',
+          null,
+          this.props.appName
+        )
       )
     );
   }
@@ -36124,7 +36148,7 @@ var DepartmentsPage = React.createClass({
 
 module.exports = DepartmentsPage;
 
-},{"react":231,"react-router":200,"toastr":233}],238:[function(require,module,exports){
+},{"../../data.json":239,"react":231,"react-router":200,"toastr":233}],238:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -36160,6 +36184,51 @@ var Home = React.createClass({
 module.exports = Home;
 
 },{"react":231,"react-router":200}],239:[function(require,module,exports){
+module.exports={
+	"employees" : [
+		{ "id": "101", "department": "100", "phone" : "+78234967890", "photo" : "100", "name" : "Дутов Эдуард Никонович" },
+		{ "id": "102", "department": "100", "phone" : "+78323487891", "photo" : "100", "name" : "Щукина Эльвира Емельяновна" },
+		{ "id": "103", "department": "100", "phone" : "+78234767892", "photo" : "100", "name" : "Цицианов Артемий Потапович" },
+		{ "id": "104", "department": "100", "phone" : "+78234667893", "photo" : "100", "name" : "Элефтеров Иван Матвеевич" },
+		{ "id": "105", "department": "100", "phone" : "+78234567894", "photo" : "100", "name" : "Гадолина Наталия Степановна" },
+
+		{ "id": "106", "department": "101", "phone" : "+78234467895", "photo" : "100", "name" : "Кораблёва Полина Мефодиевна" },
+		{ "id": "107", "department": "101", "phone" : "+78234367896", "photo" : "100", "name" : "Черниенко Феликс Олегович" },
+		{ "id": "108", "department": "101", "phone" : "+78234267897", "photo" : "100", "name" : "Казьмина Рената Кузьмевна" },
+		{ "id": "109", "department": "101", "phone" : "+78234167898", "photo" : "100", "name" : "Касимов Антип Ираклиевич" },
+
+		{ "id": "110", "department": "102", "phone" : "+78234067899", "photo" : "100", "name" : "Абумайлова Ираида Яновна" },
+		{ "id": "111", "department": "102", "phone" : "+78234967890", "photo" : "100", "name" : "Бугакова Лариса Ростиславовна" },
+		{ "id": "112", "department": "102", "phone" : "+78234867891", "photo" : "100", "name" : "Квасникова Ефросинья Николаевна" },
+		{ "id": "113", "department": "102", "phone" : "+78234767892", "photo" : "100", "name" : "Северов Лаврентий Венедиктович" },
+
+		{ "id": "114", "department": "103", "phone" : "+78234667893", "photo" : "100", "name" : "Гудков Якуб Дмитриевич" },
+		{ "id": "115", "department": "103", "phone" : "+78234567894", "photo" : "100", "name" : "Ивашева Анфиса Данииловна" },
+		{ "id": "116", "department": "103", "phone" : "+78234467895", "photo" : "100", "name" : "Колдаева Дарья Павеловна" },
+		{ "id": "117", "department": "103", "phone" : "+78234367896", "photo" : "100", "name" : "Полякова Инесса Вячеславовна" },
+
+		{ "id": "118", "department": "104", "phone" : "+78234267897", "photo" : "100", "name" : "Шулепин Артемий Натанович" },
+		{ "id": "119", "department": "104", "phone" : "+78234167898", "photo" : "100", "name" : "Элькина Пелагея Трофимовна" },
+		{ "id": "120", "department": "104", "phone" : "+78234067899", "photo" : "100", "name" : "Зуев Артем Гаврилевич" }
+	],
+
+	"departments" : [
+		{ "id" : "100", "name" : "Бухгалтерия" },
+		{ "id" : "101", "name" : "Разработчики" },
+		{ "id" : "102", "name" : "Менеджнеры" },
+		{ "id" : "103", "name" : "Тестировщики" },
+		{ "id" : "104", "name" : "Техническая поддержка" }
+	],
+	"photos" : [
+		{ "id" : "100", "data" : "data:image/png;base64,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"}
+	]
+}
+
+
+
+
+
+},{}],240:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -36168,7 +36237,7 @@ var routes = require('./routes');
 
 ReactDom.render(routes, document.getElementById('app'));
 
-},{"./routes":240,"react":231,"react-dom":47}],240:[function(require,module,exports){
+},{"./routes":241,"react":231,"react-dom":47}],241:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -36200,4 +36269,4 @@ var routes = React.createElement(
 
 module.exports = routes;
 
-},{"./components/app":235,"./components/employees/departmentsPage":237,"./components/homePage":238,"react":231,"react-router":200}]},{},[239]);
+},{"./components/app":235,"./components/employees/departmentsPage":237,"./components/homePage":238,"react":231,"react-router":200}]},{},[240]);

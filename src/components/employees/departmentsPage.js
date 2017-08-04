@@ -2,6 +2,7 @@
 
 var React = require('react');
 var Link = require('react-router').Link;
+var employees = require('../../data.json');
 var toastr = require('toastr');
 
 var DepartmentsPage = React.createClass({
@@ -9,7 +10,9 @@ var DepartmentsPage = React.createClass({
   //   authors: React.PropTypes.array.isRequired
   // },
 
-  render: function() {
+  render: function () {
+
+
     // var createAuthorRow = function(author) {
     //   return (
     //     <tr key={author.id}>
@@ -30,6 +33,7 @@ var DepartmentsPage = React.createClass({
           </tr>
           </thead>
           <tbody>
+          {this.props.appName}
           {/*{this.props.authors.map(createAuthorRow, this)}*/}
           </tbody>
         </table>
