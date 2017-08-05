@@ -36035,7 +36035,7 @@ var App = React.createClass({
 
 module.exports = App;
 
-},{"../data.json":240,"./common/header":236,"jquery":43,"react":231}],236:[function(require,module,exports){
+},{"../data.json":241,"./common/header":236,"jquery":43,"react":231}],236:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -36086,6 +36086,92 @@ var Header = React.createClass({
 module.exports = Header;
 
 },{"react":231,"react-router":200}],237:[function(require,module,exports){
+"use strict";
+
+var React = require('react');
+var Link = require('react-router').Link;
+var toastr = require('toastr');
+
+var DepartmentsPage = React.createClass({
+    displayName: 'DepartmentsPage',
+
+    // propTypes: {
+    //   authors: React.PropTypes.array.isRequired
+    // },
+
+    render: function () {
+
+        var createEmployeeRow = function (employee) {
+            return React.createElement(
+                'tr',
+                { key: employee.id },
+                React.createElement('td', null),
+                React.createElement(
+                    'td',
+                    null,
+                    React.createElement(
+                        Link,
+                        { to: "employees/" + employee.id },
+                        employee.id
+                    )
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    React.createElement(
+                        Link,
+                        { to: "employees/" + employee.id },
+                        employee.name
+                    )
+                )
+            );
+        };
+
+        var loadEmployeeList = function (departmentID) {
+            var catalog = JSON.parse(localStorage.getItem('catalog'));
+            return catalog.employees.filter(function (employee) {
+                return employee.department === departmentID;
+            });
+        };
+
+        return React.createElement(
+            'div',
+            null,
+            React.createElement(
+                'table',
+                { className: 'table' },
+                React.createElement(
+                    'thead',
+                    null,
+                    React.createElement(
+                        'tr',
+                        null,
+                        React.createElement('th', null),
+                        React.createElement(
+                            'th',
+                            null,
+                            'ID'
+                        ),
+                        React.createElement(
+                            'th',
+                            null,
+                            '\u0424\u0418\u041E'
+                        )
+                    )
+                ),
+                React.createElement(
+                    'tbody',
+                    null,
+                    loadEmployeeList(this.props.params.id).map(createEmployeeRow, this)
+                )
+            )
+        );
+    }
+});
+
+module.exports = DepartmentsPage;
+
+},{"react":231,"react-router":200,"toastr":233}],238:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -36164,7 +36250,7 @@ var DepartmentsPage = React.createClass({
 
 module.exports = DepartmentsPage;
 
-},{"react":231,"react-router":200,"toastr":233}],238:[function(require,module,exports){
+},{"react":231,"react-router":200,"toastr":233}],239:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -36231,7 +36317,7 @@ var EmployeePage = React.createClass({
 
 module.exports = EmployeePage;
 
-},{"react":231,"react-router":200,"toastr":233}],239:[function(require,module,exports){
+},{"react":231,"react-router":200,"toastr":233}],240:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -36305,7 +36391,7 @@ var Home = React.createClass({
 
 module.exports = Home;
 
-},{"react":231,"react-router":200}],240:[function(require,module,exports){
+},{"react":231,"react-router":200}],241:[function(require,module,exports){
 module.exports={
 	"employees" : [
 		{ "id": "101", "department": "100", "phone" : "+78234967890", "photo" : "100", "name" : "Дутов Эдуард Никонович" },
@@ -36350,7 +36436,7 @@ module.exports={
 
 
 
-},{}],241:[function(require,module,exports){
+},{}],242:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -36359,7 +36445,7 @@ var routes = require('./routes');
 
 ReactDom.render(routes, document.getElementById('app'));
 
-},{"./routes":242,"react":231,"react-dom":47}],242:[function(require,module,exports){
+},{"./routes":243,"react":231,"react-dom":47}],243:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -36375,6 +36461,7 @@ var App = require('./components/app');
 var HomePage = require('./components/homePage');
 var Departments = require('./components/employees/departmentsPage');
 var EmployeePage = require('./components/employees/employeePage');
+var DepartmentPage = require('./components/employees/departmentPage');
 // var AboutPage = require('./components/about/aboutPage');
 // var NotFoundPage = require('./components/notFoundPage');
 
@@ -36386,10 +36473,11 @@ var routes = React.createElement(
     { path: '/', component: App },
     React.createElement(IndexRoute, { component: HomePage }),
     React.createElement(Route, { path: 'departments', component: Departments }),
-    React.createElement(Route, { path: 'employees/:id', component: EmployeePage })
+    React.createElement(Route, { path: 'employees/:id', component: EmployeePage }),
+    React.createElement(Route, { path: 'departments/:id/employees', component: DepartmentPage })
   )
 );
 
 module.exports = routes;
 
-},{"./components/app":235,"./components/employees/departmentsPage":237,"./components/employees/employeePage":238,"./components/homePage":239,"react":231,"react-router":200}]},{},[241]);
+},{"./components/app":235,"./components/employees/departmentPage":237,"./components/employees/departmentsPage":238,"./components/employees/employeePage":239,"./components/homePage":240,"react":231,"react-router":200}]},{},[242]);

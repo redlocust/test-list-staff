@@ -13,6 +13,7 @@ var App = require('./components/app');
 var HomePage = require('./components/homePage');
 var Departments = require('./components/employees/departmentsPage');
 var EmployeePage = require('./components/employees/employeePage');
+var DepartmentPage = require('./components/employees/departmentPage');
 // var AboutPage = require('./components/about/aboutPage');
 // var NotFoundPage = require('./components/notFoundPage');
 
@@ -21,9 +22,8 @@ var routes = (
   <Route path="/" component={App}>
   <IndexRoute component={HomePage} />
   <Route path="departments" component={Departments} />
-  {/*<Route path="author" component={ManageAuthorPage} />*/}
   <Route path="employees/:id" component={EmployeePage} />
-  {/*<Route path="about" component={AboutPage} />*/}
+  <Route path="departments/:id/employees" component={DepartmentPage} />
   {/*<Redirect from="about-us" to="about" />*/}
   {/*<Redirect from="awthurs" to="authors" />*/}
   {/*<Redirect from="about/*" to="about" />*/}
