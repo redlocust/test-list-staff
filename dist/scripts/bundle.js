@@ -36100,7 +36100,6 @@ var DepartmentsPage = React.createClass({
     // },
 
     render: function () {
-
         var createEmployeeRow = function (employee) {
             return React.createElement(
                 'tr',
@@ -36162,7 +36161,30 @@ var DepartmentsPage = React.createClass({
                 React.createElement(
                     'tbody',
                     null,
-                    loadEmployeeList(this.props.params.id).map(createEmployeeRow, this)
+                    loadEmployeeList(this.props.params.id).map(createEmployeeRow, this),
+                    React.createElement(
+                        'tr',
+                        null,
+                        React.createElement('td', null),
+                        React.createElement(
+                            'td',
+                            null,
+                            React.createElement(
+                                'b',
+                                null,
+                                '\u0412\u0441\u0435\u0433\u043E \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432 \u0432 \u043E\u0442\u0434\u0435\u043B\u0435'
+                            )
+                        ),
+                        React.createElement(
+                            'td',
+                            null,
+                            React.createElement(
+                                'b',
+                                null,
+                                loadEmployeeList(this.props.params.id).length
+                            )
+                        )
+                    )
                 )
             )
         );

@@ -10,7 +10,6 @@ var DepartmentsPage = React.createClass({
     // },
 
     render: function () {
-
         var createEmployeeRow = function (employee) {
             return (
                 <tr key={employee.id}>
@@ -41,6 +40,11 @@ var DepartmentsPage = React.createClass({
                     </thead>
                     <tbody>
                     {loadEmployeeList(this.props.params.id).map(createEmployeeRow, this)}
+                    <tr>
+                        <td></td>
+                        <td><b>Всего сотрудников в отделе</b></td>
+                        <td><b>{loadEmployeeList(this.props.params.id).length}</b></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
