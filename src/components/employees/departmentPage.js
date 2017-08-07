@@ -28,8 +28,8 @@ var DepartmentsPage = React.createClass({
       return (
         <tr key={employee.id}>
           <td></td>
-          <td><Link to={"employees/" + employee.id}>{employee.id}</Link></td>
-          <td><Link to={"employees/" + employee.id}>{employee.name}</Link></td>
+          <td><Link to={"/employees/" + employee.id}>{employee.id}</Link></td>
+          <td><Link to={"/employees/" + employee.id}>{employee.name}</Link></td>
         </tr>
       );
     };

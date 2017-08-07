@@ -36052,11 +36052,6 @@ var Header = React.createClass({
         'div',
         { className: 'container-fluid' },
         React.createElement(
-          Link,
-          { to: '/', className: 'navbar-brand' },
-          React.createElement('img', { src: 'images/pluralsight-logo.png' })
-        ),
-        React.createElement(
           'ul',
           { className: 'nav navbar-nav' },
           React.createElement(
@@ -36122,7 +36117,7 @@ var DepartmentsPage = React.createClass({
           null,
           React.createElement(
             Link,
-            { to: "employees/" + employee.id },
+            { to: "/employees/" + employee.id },
             employee.id
           )
         ),
@@ -36131,7 +36126,7 @@ var DepartmentsPage = React.createClass({
           null,
           React.createElement(
             Link,
-            { to: "employees/" + employee.id },
+            { to: "/employees/" + employee.id },
             employee.name
           )
         )
@@ -36224,7 +36219,7 @@ var DepartmentsPage = React.createClass({
           null,
           React.createElement(
             Link,
-            { to: "departments/" + department.id + "/employees" },
+            { to: "/departments/" + department.id + "/employees" },
             department.id
           )
         ),
@@ -36233,7 +36228,7 @@ var DepartmentsPage = React.createClass({
           null,
           React.createElement(
             Link,
-            { to: "departments/" + department.id + "/employees" },
+            { to: "/departments/" + department.id + "/employees" },
             department.name
           )
         )
@@ -36375,7 +36370,7 @@ var Home = React.createClass({
           null,
           React.createElement(
             Link,
-            { to: "employees/" + employee.id },
+            { to: "/employees/" + employee.id },
             employee.id
           )
         ),
@@ -36384,7 +36379,7 @@ var Home = React.createClass({
           null,
           React.createElement(
             Link,
-            { to: "employees/" + employee.id },
+            { to: "/employees/" + employee.id },
             employee.name
           )
         )

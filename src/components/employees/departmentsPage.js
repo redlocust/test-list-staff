@@ -16,8 +16,8 @@ var DepartmentsPage = React.createClass({
       return (
         <tr key={department.id}>
           <td></td>
-          <td><Link to={"departments/" + department.id + "/employees"}>{department.id}</Link></td>
-          <td><Link to={"departments/" + department.id + "/employees"}>{department.name}</Link></td>
+          <td><Link to={"/departments/" + department.id + "/employees"}>{department.id}</Link></td>
+          <td><Link to={"/departments/" + department.id + "/employees"}>{department.name}</Link></td>
         </tr>
       );
     };
