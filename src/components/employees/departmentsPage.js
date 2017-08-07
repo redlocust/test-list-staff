@@ -33,7 +33,7 @@ var DepartmentsPage = React.createClass({
           </tr>
           </thead>
           <tbody>
-            {this.props.catalog.departments.map(createDepartmentRow, this)}
+            {JSON.parse(localStorage.getItem('catalog')).departments.map(createDepartmentRow, this)}
           </tbody>
         </table>
       </div>

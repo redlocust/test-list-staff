@@ -2,20 +2,31 @@
 
 var React = require('react');
 var Link = require('react-router').Link;
-var toastr = require('toastr');
 
 var EmployeePage = React.createClass({
   // propTypes: {
   //   authors: React.PropTypes.array.isRequired
   // },
 
-  render: function () {
+  componentWillMount: function () {
     const ID = this.props.params.id;
 
-    var searchEmployee = function (employee) {
+    var employee = this.props.catalog.employees.filter(function (employee) {
       return employee.id === ID;
-    };
+    })[0];
 
+    var photo = this.props.catalog.photos.filter(function (photo) {
+      return employee.photo === photo.id;
+    })[0];
+
+    this.setState({
+      employee: employee,
+      photo: photo
+    });
+  },
+
+
+  render: function () {
     return (
       <div className="container">
         <div className="row">
@@ -23,13 +34,13 @@ var EmployeePage = React.createClass({
             <div className="well well-sm">
               <div className="row">
                 <div className="col-sm-6 col-md-4">
-                  <img src={this.props.catalog.employees.filter(searchEmployee, this)[0].data}
+                  <img src={this.state.photo.data}
                        alt=""
                        className="img-rounded img-responsive"/>
                 </div>
                 <div className="col-sm-6 col-md-8">
-                  <h4>{this.props.catalog.employees.filter(searchEmployee, this)[0].name}</h4>
-                  <small>{this.props.catalog.employees.filter(searchEmployee, this)[0].phone}</small>
+                  <h4>{this.state.employee.name}</h4>
+                  <small>{this.state.employee.phone}</small>
                 </div>
               </div>
             </div>

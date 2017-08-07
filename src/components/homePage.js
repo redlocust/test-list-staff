@@ -27,7 +27,7 @@ var Home = React.createClass({
           </tr>
           </thead>
           <tbody>
-          {this.props.catalog.employees.map(createEmployeeRow, this)}
+          {JSON.parse(localStorage.getItem('catalog')).employees.map(createEmployeeRow, this)}
           </tbody>
         </table>
       </div>

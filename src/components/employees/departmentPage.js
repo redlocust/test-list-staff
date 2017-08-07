@@ -5,51 +5,57 @@ var Link = require('react-router').Link;
 var toastr = require('toastr');
 
 var DepartmentsPage = React.createClass({
-    // propTypes: {
-    //   authors: React.PropTypes.array.isRequired
-    // },
-
-    render: function () {
-        var createEmployeeRow = function (employee) {
-            return (
-                <tr key={employee.id}>
-                    <td></td>
-                    <td><Link to={"employees/" + employee.id}>{employee.id}</Link></td>
-                    <td><Link to={"employees/" + employee.id}>{employee.name}</Link></td>
-                </tr>
-            );
-        };
+  // propTypes: {
+  //   authors: React.PropTypes.array.isRequired
+  // },
 
 
-        var loadEmployeeList = function (departmentID) {
-            var catalog = JSON.parse(localStorage.getItem('catalog'));
-            return catalog.employees.filter(function (employee) {
-                return employee.department === departmentID;
-            });
-        };
+  componentWillMount: function () {
+    var departmentID = this.props.params.id;
+    var employees = JSON.parse(localStorage.getItem('catalog')).employees.filter(function (employee) {
+      return employee.department === departmentID;
+    });
 
-        return (
-            <div>
-                <table className="table">
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th>ID</th>
-                        <th>ФИО</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {loadEmployeeList(this.props.params.id).map(createEmployeeRow, this)}
-                    <tr>
-                        <td></td>
-                        <td><b>Всего сотрудников в отделе</b></td>
-                        <td><b>{loadEmployeeList(this.props.params.id).length}</b></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        );
-    }
+    this.setState({
+      employees: employees
+    });
+
+  },
+
+
+  render: function () {
+    var createEmployeeRow = function (employee) {
+      return (
+        <tr key={employee.id}>
+          <td></td>
+          <td><Link to={"employees/" + employee.id}>{employee.id}</Link></td>
+          <td><Link to={"employees/" + employee.id}>{employee.name}</Link></td>
+        </tr>
+      );
+    };
+
+    return (
+      <div>
+        <table className="table">
+          <thead>
+          <tr>
+            <th></th>
+            <th>ID</th>
+            <th>ФИО</th>
+          </tr>
+          </thead>
+          <tbody>
+          {this.state.employees.map(createEmployeeRow, this)}
+          <tr>
+            <td></td>
+            <td><b>Всего сотрудников в отделе</b></td>
+            <td><b>{this.state.employees.length}</b></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    );
+  }
 });
 
 module.exports = DepartmentsPage;
