@@ -9,8 +9,6 @@ var concat = require('gulp-concat'); //Concatenates files
 var lint = require('gulp-eslint'); //Lint JS files, including JSX
 var historyApiFallback = require('connect-history-api-fallback'); //Load index.html regardless of what's in the URL
 
-var browserSync = require('browser-sync');
-
 var config = {
   port: 9005,
   devBaseUrl: 'http://localhost',
