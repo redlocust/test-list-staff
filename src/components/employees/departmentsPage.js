@@ -2,7 +2,6 @@
 
 var React = require('react');
 var Link = require('react-router').Link;
-var toastr = require('toastr');
 
 var DepartmentsPage = React.createClass({
   render: function () {
