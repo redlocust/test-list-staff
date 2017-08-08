@@ -5,17 +5,11 @@ var Link = require('react-router').Link;
 var toastr = require('toastr');
 
 var DepartmentsPage = React.createClass({
-  // propTypes: {
-  //   authors: React.PropTypes.array.isRequired
-  // },
-
   render: function () {
-
 
     var createDepartmentRow = function (department) {
       return (
         <tr key={department.id}>
-          <td></td>
           <td><Link to={"/departments/" + department.id + "/employees"}>{department.id}</Link></td>
           <td><Link to={"/departments/" + department.id + "/employees"}>{department.name}</Link></td>
         </tr>
@@ -23,17 +17,16 @@ var DepartmentsPage = React.createClass({
     };
 
     return (
-      <div>
-        <table className="table">
+      <div className="container">
+        <table className="table col-xs-12 col-sm-6 col-md-6">
           <thead>
           <tr>
-            <th></th>
             <th>ID</th>
             <th>Наименование</th>
           </tr>
           </thead>
           <tbody>
-            {JSON.parse(localStorage.getItem('catalog')).departments.map(createDepartmentRow, this)}
+          {JSON.parse(localStorage.getItem('catalog')).departments.map(createDepartmentRow, this)}
           </tbody>
         </table>
       </div>

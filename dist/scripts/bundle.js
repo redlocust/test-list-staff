@@ -36050,7 +36050,7 @@ var Header = React.createClass({
       { className: 'navbar navbar-default' },
       React.createElement(
         'div',
-        { className: 'container-fluid' },
+        { className: 'container' },
         React.createElement(
           'ul',
           { className: 'nav navbar-nav' },
@@ -36085,14 +36085,9 @@ module.exports = Header;
 
 var React = require('react');
 var Link = require('react-router').Link;
-var toastr = require('toastr');
 
 var DepartmentsPage = React.createClass({
   displayName: 'DepartmentsPage',
-
-  // propTypes: {
-  //   authors: React.PropTypes.array.isRequired
-  // },
 
 
   componentWillMount: function () {
@@ -36111,7 +36106,6 @@ var DepartmentsPage = React.createClass({
       return React.createElement(
         'tr',
         { key: employee.id },
-        React.createElement('td', null),
         React.createElement(
           'td',
           null,
@@ -36135,17 +36129,16 @@ var DepartmentsPage = React.createClass({
 
     return React.createElement(
       'div',
-      null,
+      { className: 'container' },
       React.createElement(
         'table',
-        { className: 'table' },
+        { className: 'table col-xs-12 col-sm-6 col-md-6' },
         React.createElement(
           'thead',
           null,
           React.createElement(
             'tr',
             null,
-            React.createElement('th', null),
             React.createElement(
               'th',
               null,
@@ -36165,7 +36158,6 @@ var DepartmentsPage = React.createClass({
           React.createElement(
             'tr',
             null,
-            React.createElement('td', null),
             React.createElement(
               'td',
               null,
@@ -36193,7 +36185,7 @@ var DepartmentsPage = React.createClass({
 
 module.exports = DepartmentsPage;
 
-},{"react":231,"react-router":200,"toastr":233}],238:[function(require,module,exports){
+},{"react":231,"react-router":200}],238:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -36203,17 +36195,12 @@ var toastr = require('toastr');
 var DepartmentsPage = React.createClass({
   displayName: 'DepartmentsPage',
 
-  // propTypes: {
-  //   authors: React.PropTypes.array.isRequired
-  // },
-
   render: function () {
 
     var createDepartmentRow = function (department) {
       return React.createElement(
         'tr',
         { key: department.id },
-        React.createElement('td', null),
         React.createElement(
           'td',
           null,
@@ -36237,17 +36224,16 @@ var DepartmentsPage = React.createClass({
 
     return React.createElement(
       'div',
-      null,
+      { className: 'container' },
       React.createElement(
         'table',
-        { className: 'table' },
+        { className: 'table col-xs-12 col-sm-6 col-md-6' },
         React.createElement(
           'thead',
           null,
           React.createElement(
             'tr',
             null,
-            React.createElement('th', null),
             React.createElement(
               'th',
               null,
@@ -36281,9 +36267,6 @@ var Link = require('react-router').Link;
 var EmployeePage = React.createClass({
   displayName: 'EmployeePage',
 
-  // propTypes: {
-  //   authors: React.PropTypes.array.isRequired
-  // },
 
   componentWillMount: function () {
     const ID = this.props.params.id;
@@ -36364,7 +36347,6 @@ var Home = React.createClass({
       return React.createElement(
         'tr',
         { key: employee.id },
-        React.createElement('td', null),
         React.createElement(
           'td',
           null,
@@ -36388,33 +36370,36 @@ var Home = React.createClass({
 
     return React.createElement(
       'div',
-      null,
+      { className: 'container' },
       React.createElement(
-        'table',
-        { className: 'table' },
+        'div',
+        { className: 'row' },
         React.createElement(
-          'thead',
-          null,
+          'table',
+          { className: 'table col-xs-12 col-sm-6 col-md-6' },
           React.createElement(
-            'tr',
+            'thead',
             null,
-            React.createElement('th', null),
             React.createElement(
-              'th',
+              'tr',
               null,
-              'ID'
-            ),
-            React.createElement(
-              'th',
-              null,
-              '\u0424\u0418\u041E'
+              React.createElement(
+                'th',
+                null,
+                'ID'
+              ),
+              React.createElement(
+                'th',
+                null,
+                '\u0424\u0418\u041E'
+              )
             )
+          ),
+          React.createElement(
+            'tbody',
+            null,
+            JSON.parse(localStorage.getItem('catalog')).employees.map(createEmployeeRow, this)
           )
-        ),
-        React.createElement(
-          'tbody',
-          null,
-          JSON.parse(localStorage.getItem('catalog')).employees.map(createEmployeeRow, this)
         )
       )
     );
@@ -36435,7 +36420,7 @@ var NotFoundPage = React.createClass({
   render: function () {
     return React.createElement(
       'div',
-      null,
+      { className: 'container' },
       React.createElement(
         'h1',
         null,
@@ -36446,7 +36431,7 @@ var NotFoundPage = React.createClass({
         null,
         React.createElement(
           Link,
-          { to: 'app' },
+          { to: '/' },
           'Back to Home'
         )
       )

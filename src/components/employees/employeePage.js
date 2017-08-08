@@ -4,9 +4,6 @@ var React = require('react');
 var Link = require('react-router').Link;
 
 var EmployeePage = React.createClass({
-  // propTypes: {
-  //   authors: React.PropTypes.array.isRequired
-  // },
 
   componentWillMount: function () {
     const ID = this.props.params.id;

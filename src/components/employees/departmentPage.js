@@ -2,13 +2,8 @@
 
 var React = require('react');
 var Link = require('react-router').Link;
-var toastr = require('toastr');
 
 var DepartmentsPage = React.createClass({
-  // propTypes: {
-  //   authors: React.PropTypes.array.isRequired
-  // },
-
 
   componentWillMount: function () {
     var departmentID = this.props.params.id;
@@ -27,7 +22,6 @@ var DepartmentsPage = React.createClass({
     var createEmployeeRow = function (employee) {
       return (
         <tr key={employee.id}>
-          <td></td>
           <td><Link to={"/employees/" + employee.id}>{employee.id}</Link></td>
           <td><Link to={"/employees/" + employee.id}>{employee.name}</Link></td>
         </tr>
@@ -35,11 +29,10 @@ var DepartmentsPage = React.createClass({
     };
 
     return (
-      <div>
-        <table className="table">
+      <div className="container">
+        <table className="table col-xs-12 col-sm-6 col-md-6">
           <thead>
           <tr>
-            <th></th>
             <th>ID</th>
             <th>ФИО</th>
           </tr>
@@ -47,7 +40,6 @@ var DepartmentsPage = React.createClass({
           <tbody>
           {this.state.employees.map(createEmployeeRow, this)}
           <tr>
-            <td></td>
             <td><b>Всего сотрудников в отделе</b></td>
             <td><b>{this.state.employees.length}</b></td>
           </tr>

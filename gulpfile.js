@@ -9,6 +9,8 @@ var concat = require('gulp-concat'); //Concatenates files
 var lint = require('gulp-eslint'); //Lint JS files, including JSX
 var historyApiFallback = require('connect-history-api-fallback'); //Load index.html regardless of what's in the URL
 
+var browserSync = require('browser-sync');
+
 var config = {
   port: 9005,
   devBaseUrl: 'http://localhost',
@@ -18,8 +20,7 @@ var config = {
     images: './src/images/*',
     css: [
       'node_modules/bootstrap/dist/css/bootstrap.min.css',
-      'node_modules/bootstrap/dist/css/bootstrap-theme.min.css',
-      'node_modules/toastr/build/toastr.min.css'
+      'node_modules/bootstrap/dist/css/bootstrap-theme.min.css'
     ],
     dist: './dist',
     mainJs: './src/main.js'
@@ -78,16 +79,15 @@ gulp.task('images', function () {
     .pipe(gulp.dest(config.paths.dist));
 });
 
-// gulp.task('lint', function() {
-//   return gulp.src(config.paths.js)
-//     .pipe(lint({config: '.eslintrc'}))
-//     .pipe(lint.format());
-// });
+gulp.task('lint', function() {
+  return gulp.src(config.paths.js)
+    .pipe(lint({config: '.eslintrc'}))
+    .pipe(lint.format());
+});
 
 gulp.task('watch', function() {
   gulp.watch(config.paths.html, ['html']);
   gulp.watch(config.paths.js, ['js']);
-  //gulp.watch(config.paths.js, ['js', 'lint']);
 });
 
 //gulp.task('default', ['html', 'js', 'css', 'images', 'lint', 'open', 'watch']);
